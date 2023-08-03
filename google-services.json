@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "790704180721",
+    "project_id": "twende-c5fe9",
+    "storage_bucket": "twende-c5fe9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790704180721:android:ad600173921f07fcebc850",
+        "android_client_info": {
+          "package_name": "com.example.rideapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790704180721-lmjdsl3maet9q4ker1muu7ooac4u3f3l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4sgVF12mMEQ-4dCDRsfKiewAnOr6RkCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790704180721-lmjdsl3maet9q4ker1muu7ooac4u3f3l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
