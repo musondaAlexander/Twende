@@ -240,7 +240,7 @@ class LoginScreen extends StatelessWidget {
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0,
-    f    );
+        );
       }
     }
   }
