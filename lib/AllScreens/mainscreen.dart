@@ -82,12 +82,15 @@ class _MainScreenState extends State<MainScreen> {
 
                           ],
                         ),
-                        child: Row(
-                          children: [
-                            Icon(Icons.search, color: Colors.yellowAccent,),
-                            SizedBox(width: 10.0,),
-                            Text("Search Drop Off",)
-                          ],
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Row(
+                            children: [
+                              Icon(Icons.search, color: Colors.yellow,),
+                              SizedBox(width: 10.0,),
+                              Text("Search Drop Off",)
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(height: 24.0),
@@ -100,7 +103,7 @@ class _MainScreenState extends State<MainScreen> {
                             children: [
                                   Text("Add home"),
                               SizedBox(height: 4.0,),
-                              Text("Your Current Home address",style: TextStyle(color: Colors.grey[200], fontSize: 12.0),),
+                              Text("Your Current Home address",style: TextStyle(color: Colors.black54, fontSize: 12.0),),
                             ],
                           ),
                         ],
@@ -117,7 +120,7 @@ class _MainScreenState extends State<MainScreen> {
                             children: [
                               Text("Add work"),
                               SizedBox(height: 4.0,),
-                              Text("Your Current office address",style: TextStyle(color: Colors.grey[200], fontSize: 12.0),),
+                              Text("Your Current office address",style: TextStyle(color: Colors.black54, fontSize: 12.0),),
                             ],
                           ),
                         ],
