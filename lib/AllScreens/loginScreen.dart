@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:ride_app/AllScreens/registrationScreen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:ride_app/AllWidgets/progressDialog.dart';
 
 import '../main.dart';
 import 'mainscreen.dart';
@@ -143,73 +144,82 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-//Function that loges in and authenticate the user.
+// //Function that loges in and authenticate the user.
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  void loginAndAuthenticateUser(BuildContext context) async {
-    final User? firebaseUser = (await _firebaseAuth
-            .signInWithEmailAndPassword(
-                email: emailTextEditingController.text,
-                password: passwordTextEditingController.text)
-            .catchError((errMsg) {
-      Fluttertoast.showToast(
-        msg: "Error: $errMsg.",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-    }))
-        .user;
-
-    if (firebaseUser != null) // user Created
-    {
-      usersRef
-          .child(firebaseUser.uid)
-          .once()
-          .then((value) => (DataSnapshot snap) {
-                if (snap.value != null) {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, MainScreen.idScreen, (route) => false);
-                  Fluttertoast.showToast(
-                    msg: "You are Logged-in",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0,
-                  );
-                } else {
-                  _firebaseAuth.signOut();
-                  Fluttertoast.showToast(
-                    msg: "user not Found!!, Create new account.",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0,
-                  );
-                }
-              });
-    } else {
-      //  error-occure Display error Msg
-      Fluttertoast.showToast(
-        msg: "Error occurred, cannot be Signed in.",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-    }
-  }
+//   void loginAndAuthenticateUser(BuildContext context) async {
+//     final User? firebaseUser = (await _firebaseAuth
+//             .signInWithEmailAndPassword(
+//                 email: emailTextEditingController.text,
+//                 password: passwordTextEditingController.text)
+//             .catchError((errMsg) {
+//       Fluttertoast.showToast(
+//         msg: "Error: $errMsg.",
+//         toastLength: Toast.LENGTH_SHORT,
+//         gravity: ToastGravity.CENTER,
+//         timeInSecForIosWeb: 1,
+//         backgroundColor: Colors.red,
+//         textColor: Colors.white,
+//         fontSize: 16.0,
+//       );
+//     }))
+//         .user;
+//
+//     if (firebaseUser != null) // user Created
+//     {
+//       usersRef
+//           .child(firebaseUser.uid)
+//           .once()
+//           .then((value) => (DataSnapshot snap) {
+//                 if (snap.value != null) {
+//                   Navigator.pushNamedAndRemoveUntil(
+//                       context, MainScreen.idScreen, (route) => false);
+//                   Fluttertoast.showToast(
+//                     msg: "You are Logged-in",
+//                     toastLength: Toast.LENGTH_SHORT,
+//                     gravity: ToastGravity.CENTER,
+//                     timeInSecForIosWeb: 1,
+//                     backgroundColor: Colors.red,
+//                     textColor: Colors.white,
+//                     fontSize: 16.0,
+//                   );
+//                 } else {
+//                   _firebaseAuth.signOut();
+//                   Fluttertoast.showToast(
+//                     msg: "user not Found!!, Create new account.",
+//                     toastLength: Toast.LENGTH_SHORT,
+//                     gravity: ToastGravity.CENTER,
+//                     timeInSecForIosWeb: 1,
+//                     backgroundColor: Colors.red,
+//                     textColor: Colors.white,
+//                     fontSize: 16.0,
+//                   );
+//                 }
+//               });
+//     } else {
+//       //  error-occure Display error Msg
+//       Fluttertoast.showToast(
+//         msg: "Error occurred, cannot be Signed in.",
+//         toastLength: Toast.LENGTH_SHORT,
+//         gravity: ToastGravity.CENTER,
+//         timeInSecForIosWeb: 1,
+//         backgroundColor: Colors.red,
+//         textColor: Colors.white,
+//         fontSize: 16.0,
+//       );
+//     }
+//   }
 
 //  trial function to test other login mechanisms
   void _loginUser(BuildContext context) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      
+      builder: (BuildContext context) { 
+        return ProgressDialog(message: "Authenticating, Please wait...",);
+      },
+
+    );
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
