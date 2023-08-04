@@ -229,7 +229,9 @@ class LoginScreen extends StatelessWidget {
       // Navigate to the home screen after successful login.
       Navigator.pushReplacementNamed(context, MainScreen.idScreen);
     } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
       if (e.code == 'user-not-found') {
+        Navigator.pop(context);
         _firebaseAuth.signOut();
         Fluttertoast.showToast(
           msg: "user not Found!!, Create new account.",
@@ -241,6 +243,7 @@ class LoginScreen extends StatelessWidget {
           fontSize: 16.0,
         );
       }  else {
+        Navigator.pop(context);
         // Handle other Firebase authentication errors.
         Fluttertoast.showToast(
           msg: 'Error: $e',

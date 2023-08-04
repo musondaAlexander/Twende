@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../AllWidgets/progressDialog.dart';
 import '../main.dart';
 import 'loginScreen.dart';
 import 'mainscreen.dart';
@@ -197,15 +198,24 @@ class RegistrationScreen extends StatelessWidget {
     );
   }
 
-  //Function that loges in and authenticate the user.
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
+  //Function to register user
   void registerNewUser(BuildContext context) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+
+      builder: (BuildContext context) {
+        return ProgressDialog(message: "Registering, Please wait...",);
+      },
+
+    );
     final User? firebaseUser = (await _firebaseAuth
             .createUserWithEmailAndPassword(
                 email: emailTextEditingController.text,
                 password: passwordTextEditingController.text)
             .catchError((errMsg) {
+      Navigator.pop(context);
       Fluttertoast.showToast(
         msg: "Error: $errMsg.",
         toastLength: Toast.LENGTH_SHORT,
@@ -239,6 +249,7 @@ class RegistrationScreen extends StatelessWidget {
       Navigator.pushNamedAndRemoveUntil(
           context, MainScreen.idScreen, (route) => false);
     } else {
+      Navigator.pop(context);
       //  error-occure Display error Msg
       Fluttertoast.showToast(
         msg: "New user Account has not been Created",
