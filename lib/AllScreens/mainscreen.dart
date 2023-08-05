@@ -27,6 +27,46 @@ class _MainScreenState extends State<MainScreen> {
         title: const Text("Main Screen"),
         backgroundColor: Colors.yellowAccent,
       ),
+      drawer: Container(
+        color: Colors.white,
+        width: 255.0,
+        child:Drawer(
+          child: ListView(
+            children: [
+            //  Drawer Header
+              Container(
+                height: 165.0,
+                child: DrawerHeader(
+                  decoration:BoxDecoration(
+                    color:Colors.white,
+                  ) , child: Row(
+                  children: [
+                    Image.asset("images/user_icon.png",height: 65.0,width: 65.0,),
+                    SizedBox(width: 16.0),
+                    Column(
+                      children: [
+                        Text("Profile Name", style: TextStyle(fontSize: 16.0,fontFamily: "Brand Bold"),),
+                        SizedBox(height: 6.0,),
+                        Text("View Profile"),
+                      ],
+                    ),
+                  ],
+                ),
+                ),
+              ),
+              DividerWidget(),
+              SizedBox(height: 12.0,),
+            //  Drawer Body Controllers
+              ListTile(
+                leading: Icon(Icons.history),
+                title: ,
+              ),
+
+
+            ],
+          ),
+        ),
+      ),
       body: Stack(
         children: [
           GoogleMap(
