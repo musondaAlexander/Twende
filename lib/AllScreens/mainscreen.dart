@@ -13,8 +13,10 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+
   Completer<GoogleMapController> _controllerGoogleMap = Completer<GoogleMapController>();
   late GoogleMapController newGoogleMapController;
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   static const CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
       target: LatLng(37.43296265331129, -122.08832357078792),
@@ -23,6 +25,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key:scaffoldKey ,
       appBar: AppBar(
         title: const Text("Main Screen"),
         backgroundColor: Colors.yellowAccent,
@@ -59,9 +62,16 @@ class _MainScreenState extends State<MainScreen> {
             //  Drawer Body Controllers
               ListTile(
                 leading: Icon(Icons.history),
-                title: ,
+                title:  Text("History",style: TextStyle(fontSize: 15.0),),
               ),
-
+              ListTile(
+                leading: Icon(Icons.history),
+                title:  Text("View Profile",style: TextStyle(fontSize: 15.0),),
+              ),
+              ListTile(
+                leading: Icon(Icons.history),
+                title:  Text("About",style: TextStyle(fontSize: 15.0),),
+              ),
 
             ],
           ),
@@ -78,6 +88,40 @@ class _MainScreenState extends State<MainScreen> {
               newGoogleMapController = controller;
             },
           ),
+
+          //HamburgerButton for drawer
+          Positioned(
+           top: 45.0,
+            left:22.0,
+            child: GestureDetector(
+              onTap: (){
+                scaffoldKey.currentState?.openDrawer();
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(22.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black,
+                      blurRadius: 6.0,
+                      spreadRadius: 0.5,
+                      offset: Offset(
+                        0.7,0.7
+                      ),
+                    ),
+                  ],
+                ),
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Icon(Icons.menu, color: Colors.black,),
+                  radius: 20.0,
+
+                ),
+              ),
+            ),
+          ),
+
           Positioned(
               left: 0.0,
               right: 0.0,
@@ -117,7 +161,6 @@ class _MainScreenState extends State<MainScreen> {
                               blurRadius: 6.0,
                               spreadRadius: 0.5,
                               offset: Offset(0.7,0.7),
-
                             ),
 
                           ],
