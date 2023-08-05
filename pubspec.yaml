@@ -36,6 +36,7 @@ dependencies:
   # add this line to your dependencies
   fluttertoast: ^8.2.2
   google_maps_flutter: ^2.4.0
+  geolocator: ^9.0.2
 
 dev_dependencies:
   flutter_test:
